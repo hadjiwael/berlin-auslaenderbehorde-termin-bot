@@ -7,6 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+import os
 
 
 system = system()
@@ -60,9 +61,9 @@ class BerlinBot:
     @staticmethod
     def enter_form(driver: webdriver.Chrome):
         logging.info("Fill out form")
-        # select china
+        # select Tunesien
         s = Select(driver.find_element(By.ID, 'xi-sel-400'))
-        s.select_by_visible_text("China")
+        s.select_by_visible_text("Tunesien")
         # eine person
         s = Select(driver.find_element(By.ID, 'xi-sel-422'))
         s.select_by_visible_text("eine Person")
@@ -76,11 +77,11 @@ class BerlinBot:
         time.sleep(2)
 
         # click on study group
-        driver.find_element(By.XPATH, '//*[@id="inner-479-0-2"]/div/div[1]/label/p').click()
+        driver.find_element(By.XPATH, '//*[@id="inner-285-0-2"]/div/div[3]/label/p').click()
         time.sleep(2)
 
         # b/c of stufy
-        driver.find_element(By.XPATH, '//*[@id="inner-479-0-2"]/div/div[2]/div/div[5]/label').click()
+        driver.find_element(By.XPATH, '//*[@id="inner-285-0-2"]/div/div[4]/div/div[1]/label').click()
         time.sleep(4)
 
         # submit form
@@ -90,7 +91,8 @@ class BerlinBot:
     def _success(self):
         logging.info("!!!SUCCESS - do not close the window!!!!")
         while True:
-            self._play_sound_osx(self._sound_file)
+            #self._play_sound_osx(self._sound_file)
+            os.system("start alarm.wav")
             time.sleep(15)
         
         # todo play something and block the browser
@@ -112,7 +114,8 @@ class BerlinBot:
 
     def run_loop(self):
         # play sound to check if it works
-        self._play_sound_osx(self._sound_file)
+        #self._play_sound_osx(self._sound_file)
+        os.system("start alarm.wav")
         while True:
             logging.info("One more round")
             self.run_once()
